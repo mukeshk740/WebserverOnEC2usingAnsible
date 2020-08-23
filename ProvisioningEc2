@@ -1,0 +1,20 @@
+- hosts: localhost
+  vars_files:
+          - cred.yml
+  tasks:
+   - name: Provisioning RedHat machine on AWS
+     ec2:
+        key_name: mykeynew
+        instance_type: t2.micro
+        image: "ami-052c08d70def0ac62"
+        wait: yes
+        count: 1
+        instance_tags:
+                Name: "Webserver"
+        vpc_subnet_id: "subnet-b0df9dd8"
+        group_id: "sg-3016225a"
+        assign_public_ip: yes
+        region: "ap-south-1"
+        state: present
+        aws_access_key: "{{ myuser }}"
+        aws_secret_key: "{{ mypass }}"
